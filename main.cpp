@@ -18,6 +18,7 @@
 
 /* Creates on 2022/9/14. */
 #include <iostream>
+#include <glad/glad.h>
 #include "sportswin.h"
 
 void SportsWindowResizeCallback(SportsWindow *sportswin, int w, int h)
@@ -29,6 +30,8 @@ int main()
 {
 	auto sportswin = new SportsWindow(800, 600, "sports");
 	sportswin->SetWindowResizeCallback(SportsWindowResizeCallback);
+
+	SportsMakeContextCurrent(sportswin);
 
 	while (!sportswin->ShouldClose()) {
 		SportsPollEvents();

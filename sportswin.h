@@ -29,6 +29,8 @@ class SportsWindow;
 
 /* window resize callback */
 typedef void (*SportsfnSetWindowResizeCallback) (SportsWindow *sportswin, int w, int h);
+/* window framebuffer callback */
+typedef void (*SportsfnSetFramebufferCallback) (SportsWindow *sportswin, int w, int h);
 
 class SportsWindow {
 public:
@@ -37,6 +39,7 @@ public:
 
     void            SetWindowSize(int w, int h);
     void            SetWindowResizeCallback(SportsfnSetWindowResizeCallback callback);
+    void            SetFramebufferCallback(SportsfnSetFramebufferCallback callback);
 
     bool            GetKey(int key)     { return glfwGetKey(pGLFWwindow, key); }
     bool            ShouldClose()       { return glfwWindowShouldClose(pGLFWwindow); }
@@ -49,6 +52,7 @@ private:
     int                                 height;
     GLFWwindow*                         pGLFWwindow;
     SportsfnSetWindowResizeCallback     sportsfnSetWindowResizeCallback;
+    SportsfnSetFramebufferCallback      sportsfnSetFramebufferCallback;
 };
 
 /* if define vulkan */
@@ -60,6 +64,21 @@ inline static VkResult SportsCreateSurfaceKHR(VkInstance instance, SportsWindow 
     return glfwCreateWindowSurface(instance, pSportsWindow->GetHandle(),
                                    NULL,
                                    pSurfaceKHR);
+}
+
+inline static const char **SportsGetRequiredInstanceExtensions(uint32_t *p_size)
+{
+    return glfwGetRequiredInstanceExtensions(p_size);
+}
+
+#endif
+
+/* if define opengl */
+#if defined(GL_VERSION_1_1)
+
+inline static void SportsMakeContextCurrent(SportsWindow *pSportsWindow)
+{
+    glfwMakeContextCurrent(pSportsWindow->GetHandle());
 }
 
 #endif

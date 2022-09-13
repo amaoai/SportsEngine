@@ -19,7 +19,7 @@
 /* Creates on 2022/9/14. */
 #include "sportswin.h"
 
-SportsWindow::SportsWindow(int w, int h, const char* title)
+SportsWindow::SportsWindow(int w, int h, const char* title) : width(w), height(h)
 {
 	glfwInit();
 
@@ -32,9 +32,6 @@ SportsWindow::SportsWindow(int w, int h, const char* title)
 
 	if (pGLFWwindow == NULL)
 		sports::error("sports error: create window failed!");
-
-    this->width = w;
-    this->height = h;
 }
 
 SportsWindow::~SportsWindow()
@@ -58,4 +55,14 @@ void SportsWindow::SetWindowResizeCallback(SportsfnSetWindowResizeCallback callb
         SportsWindow *sportswin = (SportsWindow *) glfwGetWindowUserPointer(glfWwindow);
         sportswin->sportsfnSetWindowResizeCallback(sportswin, w, h);
     });
+}
+
+void SportsWindow::SetFramebufferCallback(SportsfnSetFramebufferCallback callback)
+{
+	this->sportsfnSetFramebufferCallback = callback;
+
+	glfwSetWindowSizeCallback(pGLFWwindow, [](GLFWwindow* glfWwindow, int w, int h) {
+		SportsWindow* sportswin = (SportsWindow*)glfwGetWindowUserPointer(glfWwindow);
+		sportswin->sportsfnSetFramebufferCallback(sportswin, w, h);
+	});
 }
