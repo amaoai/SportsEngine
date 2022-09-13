@@ -8,7 +8,7 @@
 
 class SportsWindow;
 
-typedef void (*SportsfnSetWindowSizeCallback) (SportsWindow *sportswin, int w, int h);
+typedef void (*SportsfnSetWindowResizeCallback) (SportsWindow *sportswin, int w, int h);
 
 class SportsWindow {
 public:
@@ -16,7 +16,7 @@ public:
     ~SportsWindow();
 
     void            SetWindowSize(int w, int h);
-    void            SetWindowResizeCallback(SportsfnSetWindowSizeCallback callback);
+    void            SetWindowResizeCallback(SportsfnSetWindowResizeCallback callback);
 
     bool            GetKey(int key)     { return glfwGetKey(pGLFWwindow, key); }
     bool            ShouldClose()       { return glfwWindowShouldClose(pGLFWwindow); }
@@ -28,7 +28,7 @@ private:
     int                                 width;
     int                                 height;
     GLFWwindow*                         pGLFWwindow;
-    SportsfnSetWindowSizeCallback       sportsfnSetWindowSizeCallback;
+    SportsfnSetWindowResizeCallback     sportsfnSetWindowResizeCallback;
 };
 
 /* if define vulkan */

@@ -31,12 +31,12 @@ void SportsWindow::SetWindowSize(int w, int h)
     glfwSetWindowSize(pGLFWwindow, w, h);
 }
 
-void SportsWindow::SetWindowResizeCallback(SportsfnSetWindowSizeCallback callback)
+void SportsWindow::SetWindowResizeCallback(SportsfnSetWindowResizeCallback callback)
 {
-    this->sportsfnSetWindowSizeCallback = callback;
+    this->sportsfnSetWindowResizeCallback = callback;
 
     glfwSetWindowSizeCallback(pGLFWwindow, [](GLFWwindow *glfWwindow, int w, int h) {
         SportsWindow *sportswin = (SportsWindow *) glfwGetWindowUserPointer(glfWwindow);
-        sportswin->sportsfnSetWindowSizeCallback(sportswin, w, h);
+        sportswin->sportsfnSetWindowResizeCallback(sportswin, w, h);
     });
 }
