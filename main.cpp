@@ -1,8 +1,16 @@
 #include <iostream>
-#include <vulkan/vulkan.h>
-#include <GLFW/glfw3.h>
+#include "sportswin.h"
 
 int main()
 {
+	auto sportswin = new SportsWindow(800, 600, "sports");
+
+	while (!sportswin->ShouldClose()) {
+		SportsPollEvents();
+	}
+
+	delete sportswin;
+	SportsTerminate();
+
 	return 0;
 }

@@ -13,7 +13,7 @@ include_directories(SYSTEM
 )
 
 # glfw 动态链接库
-link_directories(${PROJECT_SOURCE_DIR}/third-party/glfw/lib-vc2022)
+link_directories(${PROJECT_SOURCE_DIR}/third-party/glfw/lib-mingw-w64)
 
 # 查找 vulkan 库
 find_package(Vulkan REQUIRED FATAL_ERROR)
@@ -24,7 +24,9 @@ ENDIF()
 
 # 将源代码添加到此项目的可执行文件。
 add_executable (${PROJECT_NAME} 
-	"main.cpp"
+	"main.cpp" 
+	"sportswin.cpp"
+	"tools/logs.cpp"
 )
 
-target_link_libraries(${PROJECT_NAME} glfw3 ${Vulkan_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} -lglfw3 ${Vulkan_LIBRARIES})
