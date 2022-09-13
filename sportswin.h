@@ -11,15 +11,18 @@ public:
     SportsWindow(int w, int h, const char *title);
     ~SportsWindow();
 
-    bool        ShouldClose()   { return glfwWindowShouldClose(pWindow); }
-    int         GetWidth()      { return width; }
-    int         GetHeight()     { return height; }
-    GLFWwindow *GetHandle()     { return pWindow; }
+    void            SetWindowSize(int w, int h);
+
+    bool            GetKey(int key)     { return glfwGetKey(pGLFWwindow, key); }
+    bool            ShouldClose()       { return glfwWindowShouldClose(pGLFWwindow); }
+    int             GetWidth()          { return width; }
+    int             GetHeight()         { return height; }
+    GLFWwindow*     GetHandle()         { return pGLFWwindow; }
 
 private:
-    int width;
-    int height;
-    GLFWwindow *pWindow;
+    int                                 width;
+    int                                 height;
+    GLFWwindow*                         pGLFWwindow;
 };
 
 /* define vulkan */
