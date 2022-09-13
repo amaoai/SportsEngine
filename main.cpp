@@ -1,9 +1,15 @@
 #include <iostream>
 #include "sportswin.h"
 
+void SportsWindowResizeCallback(SportsWindow *sportswin, int w, int h)
+{
+	sports::info("resize callback: %d,%d\n", w, h);
+}
+
 int main()
 {
 	auto sportswin = new SportsWindow(800, 600, "sports");
+	sportswin->SetWindowResizeCallback(SportsWindowResizeCallback);
 
 	while (!sportswin->ShouldClose()) {
 		SportsPollEvents();

@@ -9,6 +9,7 @@ SportsWindow::SportsWindow(int w, int h, const char* title)
 	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
 
     pGLFWwindow = glfwCreateWindow(w, h, title, NULL, NULL);
+    glfwSetWindowUserPointer(pGLFWwindow, this);
 
 	if (pGLFWwindow == NULL)
 		sports::error("sports error: create window failed!");
@@ -28,5 +29,14 @@ void SportsWindow::SetWindowSize(int w, int h)
     h < 0 ? this->height = 0 : this->height = h;
 
     glfwSetWindowSize(pGLFWwindow, w, h);
+}
 
+void SportsWindow::SetWindowResizeCallback(SportsfnSetWindowSizeCallback callback)
+{
+    this->sportsfnSetWindowSizeCallback = callback;
+
+    glfwSetWindowSizeCallback(pGLFWwindow, [](GLFWwindow *glfWwindow, int w, int h) {
+        SportsWindow *sportswin = (SportsWindow *) glfwGetWindowUserPointer(glfWwindow);
+        sportswin->sportsfnSetWindowSizeCallback(sportswin, w, h);
+    });
 }
