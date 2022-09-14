@@ -46,11 +46,12 @@ public:
     int             GetWidth()          { return width; }
     int             GetHeight()         { return height; }
     GLFWwindow*     GetHandle()         { return pGLFWwindow; }
+    void            SwapBuffers()       { glfwSwapBuffers(pGLFWwindow); }
 
 private:
-    int                                 width;
-    int                                 height;
-    GLFWwindow*                         pGLFWwindow;
+	int                                 width;
+	int                                 height;
+	GLFWwindow* pGLFWwindow;
     SportsfnSetWindowResizeCallback     sportsfnSetWindowResizeCallback;
     SportsfnSetFramebufferCallback      sportsfnSetFramebufferCallback;
 };

@@ -23,15 +23,19 @@ SportsWindow::SportsWindow(int w, int h, const char* title) : width(w), height(h
 {
 	glfwInit();
 
-	glfwWindowHint(GLFW_VERSION_MAJOR, 3);
-	glfwWindowHint(GLFW_VERSION_MINOR, 3);
-	glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	// glfwWindowHint(GLFW_CLIENT_API, GLFW_NO_API);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
     pGLFWwindow = glfwCreateWindow(w, h, title, NULL, NULL);
-    glfwSetWindowUserPointer(pGLFWwindow, this);
 
-	if (pGLFWwindow == NULL)
-		sports::error("sports error: create window failed!");
+	if (pGLFWwindow == NULL) {
+        sports::error("sports error: create window failed!");
+        glfwTerminate();
+    }
+
+    glfwSetWindowUserPointer(pGLFWwindow, this);
 }
 
 SportsWindow::~SportsWindow()
