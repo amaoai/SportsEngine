@@ -19,8 +19,10 @@
 /* Creates on 2022/9/14. */
 #pragma once
 
-#include "core/sports.h"
+#include "sports/sportspch.h"
 #include "sportswin.h"
+#include "buffer/vertexbuf.h"
+#include "buffer/indexbuf.h"
 
 enum RenderAPI {
     OpenGL,
@@ -30,11 +32,14 @@ enum RenderAPI {
 /* 渲染器 */
 class SportsRenderer {
 public:
-    virtual void    BeginDrawFrame() = 0;
-    virtual void    EndDrawFrame() = 0;
+    virtual        ~SportsRenderer() {};
+
+    virtual void    BeginNewFrame() = 0;
+    virtual void    EndNewFrame() = 0;
     virtual void    SetClearColor(float r, float g, float b, float a) = 0;
     virtual void    ClearColorBuffer() = 0;
+    virtual void    DrawFrame() = 0;
 };
 
-/* 创建 Sports 渲染器 */
 extern SportsRenderer* SportsCreateRenderer(SportsWindow *pSportsWindow);
+extern void SportsDestroyRenderer(SportsRenderer *pSportsRenderer);

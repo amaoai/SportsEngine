@@ -60,7 +60,9 @@ add_executable (${PROJECT_NAME}
     "render/buffer/vertexbuf.cpp"
     "render/buffer/indexbuf.cpp"
     "render/platform/opengl/opengl_renderer.cpp"
-        )
+    "render/platform/opengl/opengl_vertex_buffer.cpp"
+    "render/platform/opengl/opengl_index_buffer.cpp"
+)
 
 # 根据编译器匹配 glfw 动态库
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)

@@ -16,13 +16,22 @@
  *
  * ************************************************************************/
 
- /* Creates on 2022/9/14. */
-#pragma once
+/* Creates on 2022/9/14. */
+#ifndef SPORTSENGINE_OPENGL_VERTEX_BUFFER_H
+#define SPORTSENGINE_OPENGL_VERTEX_BUFFER_H
 
-#include <stdio.h>
+#include "render/buffer/indexbuf.h"
 
-#if defined(WIN32)
-#  define SPORTS_API extern
-#else
-#  error sports engine only support windows platform.
-#endif
+class OpenGLIndexBuffer : public SportsIndexBuffer {
+public:
+    OpenGLIndexBuffer(unsigned long size, unsigned int *pIndices);
+    ~OpenGLIndexBuffer();
+
+    void            Bind();
+    void            UnBind();
+
+private:
+    unsigned int    indexBufferId;
+};
+
+#endif /* SPORTSENGINE_OPENGL_VERTEX_BUFFER_H */

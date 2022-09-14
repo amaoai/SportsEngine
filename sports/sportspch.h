@@ -16,19 +16,16 @@
  *
  * ************************************************************************/
 
-/* Creates on 2022/9/14. */
-#ifndef SPORTSENGINE_INDEXBUF_H
-#define SPORTSENGINE_INDEXBUF_H
+ /* Creates on 2022/9/14. */
+#pragma once
 
-class SportsIndexBuffer {
-public:
-    virtual ~SportsIndexBuffer() {};
+#include <stdio.h>
+#include <memory>
 
-    virtual void    Bind() = 0;
-    virtual void    UnBind() = 0;
-};
+#if defined(WIN32)
+#  define SPORTS_API extern
+#else
+#  error sports engine only support windows platform.
+#endif
 
-extern bool SportsCreateIndexBuffer(unsigned long size, unsigned int *pIndices, SportsIndexBuffer **ppSportsIndexBuffer);
-extern void SportsDestroyIndexBuffer(SportsIndexBuffer *pSportsIndexBuffer);
-
-#endif /* SPORTSENGINE_INDEXBUF_H */
+#define SPORTS_API extern

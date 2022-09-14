@@ -21,8 +21,6 @@
 #include <glad/glad.h>
 #include "sportswin.h"
 #include "render/renderer.h"
-#include "render/buffer/vertexbuf.h"
-#include "render/buffer/indexbuf.h"
 
 void SportsWindowResizeCallback(SportsWindow *sportswin, int w, int h)
 {
@@ -99,23 +97,28 @@ int main()
         1, 2, 3  // 第二个
     };
 
-    SportsVertexBuffer vertexBuffer(sizeof(vertices), vertices);
-    SportsIndexBuffer  indexBuffer(sizeof(indices), indices);
+    SportsVertexBuffer* vertexBuffer;
+    SportsCreateVertexBuffer(sizeof(vertices), vertices, &vertexBuffer);
+
+    SportsIndexBuffer* indexBuffer;
+    SportsCreateIndexBuffer(sizeof(indices), indices, &indexBuffer);
 
     while (!sportswin->ShouldClose()) {
         SportsPollEvents();
 
-        sportsRenderer->BeginDrawFrame();
+        sportsRenderer->BeginNewFrame();
         {
             sportsRenderer->SetClearColor(0.0f, 0.0f, 0.0f, 1.0f);
             sportsRenderer->ClearColorBuffer();
             glUseProgram(shaderProgram);
 
-            vertexBuffer.Bind();
-            indexBuffer.Bind();
+            vertexBuffer->Bind();
+            indexBuffer->Bind();
             glDrawElements(GL_TRIANGLES, 6, GL_UNSIGNED_INT, 0);
+
+            sportsRenderer->DrawFrame();
         }
-        sportsRenderer->EndDrawFrame();
+        sportsRenderer->EndNewFrame();
 
         if (sportswin->GetKey(GLFW_KEY_A))
             sportswin->SetWindowSize(sportswin->GetWidth() + 1, sportswin->GetHeight() + 1);
@@ -127,7 +130,9 @@ int main()
     }
 
     delete sportswin;
-    delete sportsRenderer;
+    SportsDestroyVertexBuffer(vertexBuffer);
+    SportsDestroyIndexBuffer(indexBuffer);
+    SportsDestroyRenderer(sportsRenderer);
     SportsTerminate();
 
     return 0;

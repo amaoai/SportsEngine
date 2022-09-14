@@ -19,27 +19,15 @@
 /* Creates on 2022/9/14. */
 #include "indexbuf.h"
 
-#include <glad/glad.h>
+#include "render/platform/opengl/opengl_index_buffer.h"
 
-SportsIndexBuffer::SportsIndexBuffer(unsigned long size, unsigned int *pIndices)
+bool SportsCreateIndexBuffer(unsigned long size, unsigned int *pIndices, SportsIndexBuffer **ppSportsIndexBuffer)
 {
-    glGenBuffers(1, &indexBufferId);
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferId);
-    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, pIndices, GL_STATIC_DRAW);
+    *ppSportsIndexBuffer = new OpenGLIndexBuffer(size, pIndices);
+    return true;
 }
 
-SportsIndexBuffer::~SportsIndexBuffer()
+void SportsDestroyIndexBuffer(SportsIndexBuffer *pSportsIndexBuffer)
 {
-    glDeleteBuffers(1, &indexBufferId);
-}
-
-void SportsIndexBuffer::Bind()
-{
-    UnBind();
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferId);
-}
-
-void SportsIndexBuffer::UnBind()
-{
-    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    delete pSportsIndexBuffer;
 }

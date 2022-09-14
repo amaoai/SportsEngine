@@ -26,10 +26,11 @@ public:
     OpenGLRenderer(SportsWindow *sportswin);
     ~OpenGLRenderer();
 
-    void            BeginDrawFrame();
-    void            EndDrawFrame();
+    void            BeginNewFrame();
+    void            EndNewFrame();
     void            SetClearColor(float r, float g, float b, float a);
     void            ClearColorBuffer();
+    void            DrawFrame();
 
 private:
     SportsWindow*    pSportsWindow;

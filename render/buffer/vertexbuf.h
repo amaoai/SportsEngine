@@ -22,15 +22,13 @@
 
 class SportsVertexBuffer {
 public:
-    SportsVertexBuffer(unsigned long size, float *pVertices);
-    ~SportsVertexBuffer();
+    virtual ~SportsVertexBuffer() {};
 
-    void            Bind();
-    void            UnBind();
-
-private:
-    unsigned int    vertexArrayId;
-    unsigned int    vertexBufferId;
+    virtual void    Bind() = 0;
+    virtual void    UnBind() = 0;
 };
+
+extern bool SportsCreateVertexBuffer(unsigned long size, float *pVertices, SportsVertexBuffer **ppSportsVertexBuffer);
+extern void SportsDestroyVertexBuffer(SportsVertexBuffer *pSportsVertexBuffer);
 
 #endif /* SPORTSENGINE_VERTEXBUF_H */

@@ -17,18 +17,22 @@
  * ************************************************************************/
 
 /* Creates on 2022/9/14. */
-#ifndef SPORTSENGINE_INDEXBUF_H
-#define SPORTSENGINE_INDEXBUF_H
+#ifndef SPORTSENGINE_OPENGL_VERTEX_BUFFER_H
+#define SPORTSENGINE_OPENGL_VERTEX_BUFFER_H
 
-class SportsIndexBuffer {
+#include "render/buffer/vertexbuf.h"
+
+class OpenGLVertexBuffer : public SportsVertexBuffer {
 public:
-    virtual ~SportsIndexBuffer() {};
+    OpenGLVertexBuffer(unsigned long size, float *pVertices);
+    ~OpenGLVertexBuffer();
 
-    virtual void    Bind() = 0;
-    virtual void    UnBind() = 0;
+    void            Bind();
+    void            UnBind();
+
+private:
+    unsigned int    vertexArrayId;
+    unsigned int    vertexBufferId;
 };
 
-extern bool SportsCreateIndexBuffer(unsigned long size, unsigned int *pIndices, SportsIndexBuffer **ppSportsIndexBuffer);
-extern void SportsDestroyIndexBuffer(SportsIndexBuffer *pSportsIndexBuffer);
-
-#endif /* SPORTSENGINE_INDEXBUF_H */
+#endif /* SPORTSENGINE_OPENGL_VERTEX_BUFFER_H */

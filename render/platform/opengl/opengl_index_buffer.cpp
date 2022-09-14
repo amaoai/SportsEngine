@@ -17,18 +17,30 @@
  * ************************************************************************/
 
 /* Creates on 2022/9/14. */
-#ifndef SPORTSENGINE_INDEXBUF_H
-#define SPORTSENGINE_INDEXBUF_H
+#include "opengl_index_buffer.h"
 
-class SportsIndexBuffer {
-public:
-    virtual ~SportsIndexBuffer() {};
+#include "tools/logs.h"
+#include <glad/glad.h>
 
-    virtual void    Bind() = 0;
-    virtual void    UnBind() = 0;
-};
+OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned long size, unsigned int *pIndices)
+{
+    glGenBuffers(1, &indexBufferId);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferId);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, pIndices, GL_STATIC_DRAW);
+}
 
-extern bool SportsCreateIndexBuffer(unsigned long size, unsigned int *pIndices, SportsIndexBuffer **ppSportsIndexBuffer);
-extern void SportsDestroyIndexBuffer(SportsIndexBuffer *pSportsIndexBuffer);
+OpenGLIndexBuffer::~OpenGLIndexBuffer()
+{
+    glDeleteBuffers(1, &indexBufferId);
+}
 
-#endif /* SPORTSENGINE_INDEXBUF_H */
+void OpenGLIndexBuffer::Bind()
+{
+    UnBind();
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, indexBufferId);
+}
+
+void OpenGLIndexBuffer::UnBind()
+{
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}

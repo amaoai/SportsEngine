@@ -34,15 +34,15 @@ OpenGLRenderer::OpenGLRenderer(SportsWindow* sportswin) : pSportsWindow(sportswi
 
 OpenGLRenderer::~OpenGLRenderer()
 {
-
+    sports::info("opengl renderer destroy!");
 }
 
-void OpenGLRenderer::BeginDrawFrame()
+void OpenGLRenderer::BeginNewFrame()
 {
 
 }
 
-void OpenGLRenderer::EndDrawFrame()
+void OpenGLRenderer::EndNewFrame()
 {
 
 }
@@ -55,4 +55,9 @@ void OpenGLRenderer::SetClearColor(float r, float g, float b, float a)
 void OpenGLRenderer::ClearColorBuffer()
 {
     glClear(GL_COLOR_BUFFER_BIT);
+}
+
+void OpenGLRenderer::DrawFrame()
+{
+
 }

@@ -7,3 +7,8 @@ SportsRenderer* SportsCreateRenderer(SportsWindow* pSportsWindow)
 {
     return new OpenGLRenderer(pSportsWindow);
 }
+
+void SportsDestroyRenderer(SportsRenderer *pSportsRenderer)
+{
+    delete pSportsRenderer;
+}
