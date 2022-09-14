@@ -16,11 +16,18 @@
  *
  * ************************************************************************/
 
- /* Creates on 2022/9/14. */
-#pragma once
+/* Creates on 2022/9/14. */
+#include "indexbuf.h"
 
-#include "render/renderer.h"
+#include "renderer/platform/opengl/opengl_index_buffer.h"
 
-class VulkanRenderer : SportsRenderer {
+bool SportsCreateIndexBuffer(unsigned long size, unsigned int *pIndices, SportsIndexBuffer **ppSportsIndexBuffer)
+{
+    *ppSportsIndexBuffer = new OpenGLIndexBuffer(size, pIndices);
+    return true;
+}
 
-};
+void SportsDestroyIndexBuffer(SportsIndexBuffer *pSportsIndexBuffer)
+{
+    delete pSportsIndexBuffer;
+}

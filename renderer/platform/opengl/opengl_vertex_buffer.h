@@ -17,17 +17,22 @@
  * ************************************************************************/
 
 /* Creates on 2022/9/14. */
-#include "vertexbuf.h"
+#ifndef SPORTSENGINE_OPENGL_VERTEX_BUFFER_H
+#define SPORTSENGINE_OPENGL_VERTEX_BUFFER_H
 
-#include "render/platform/opengl/opengl_vertex_buffer.h"
+#include "renderer/buffer/vertexbuf.h"
 
-bool SportsCreateVertexBuffer(unsigned long size, float *pVertices, SportsVertexBuffer** ppSportsVertexBuffer)
-{
-    *ppSportsVertexBuffer = new OpenGLVertexBuffer(size, pVertices);
-    return true;
-}
+class OpenGLVertexBuffer : public SportsVertexBuffer {
+public:
+    OpenGLVertexBuffer(unsigned long size, float *pVertices);
+    ~OpenGLVertexBuffer();
 
-void SportsDestroyVertexBuffer(SportsVertexBuffer *pSportsVertexBuffer)
-{
-    delete pSportsVertexBuffer;
-}
+    void            Bind();
+    void            UnBind();
+
+private:
+    unsigned int    vertexArrayId;
+    unsigned int    vertexBufferId;
+};
+
+#endif /* SPORTSENGINE_OPENGL_VERTEX_BUFFER_H */

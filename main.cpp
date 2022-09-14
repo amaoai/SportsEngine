@@ -20,7 +20,7 @@
 #include <iostream>
 #include <glad/glad.h>
 #include "sportswin.h"
-#include "render/renderer.h"
+#include "renderer/renderer.h"
 
 void SportsWindowResizeCallback(SportsWindow *sportswin, int w, int h)
 {

@@ -16,23 +16,11 @@
  *
  * ************************************************************************/
 
-/* Creates on 2022/9/14. */
-#ifndef SPORTSENGINE_OPENGL_VERTEX_BUFFER_H
-#define SPORTSENGINE_OPENGL_VERTEX_BUFFER_H
+ /* Creates on 2022/9/14. */
+#pragma once
 
-#include "render/buffer/vertexbuf.h"
+#include "renderer/renderer.h"
 
-class OpenGLVertexBuffer : public SportsVertexBuffer {
-public:
-    OpenGLVertexBuffer(unsigned long size, float *pVertices);
-    ~OpenGLVertexBuffer();
+class VulkanRenderer : SportsRenderer {
 
-    void            Bind();
-    void            UnBind();
-
-private:
-    unsigned int    vertexArrayId;
-    unsigned int    vertexBufferId;
 };
-
-#endif /* SPORTSENGINE_OPENGL_VERTEX_BUFFER_H */

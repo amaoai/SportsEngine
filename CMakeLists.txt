@@ -56,12 +56,12 @@ add_executable (${PROJECT_NAME}
     "sportswin.cpp"
     "tools/logs.cpp"
     "third-party/glad/src/glad.c"
-    "render/renderer.cpp"
-    "render/buffer/vertexbuf.cpp"
-    "render/buffer/indexbuf.cpp"
-    "render/platform/opengl/opengl_renderer.cpp"
-    "render/platform/opengl/opengl_vertex_buffer.cpp"
-    "render/platform/opengl/opengl_index_buffer.cpp"
+    "renderer/renderer.cpp"
+    "renderer/buffer/vertexbuf.cpp"
+    "renderer/buffer/indexbuf.cpp"
+    "renderer/platform/opengl/opengl_renderer.cpp"
+    "renderer/platform/opengl/opengl_vertex_buffer.cpp"
+    "renderer/platform/opengl/opengl_index_buffer.cpp"
 )
 
 # 根据编译器匹配 glfw 动态库

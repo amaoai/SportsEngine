@@ -19,7 +19,7 @@
  /* Creates on 2022/9/14. */
 #pragma once
 
-#include "render/renderer.h"
+#include "renderer/renderer.h"
 
 class OpenGLRenderer : public SportsRenderer {
 public:
