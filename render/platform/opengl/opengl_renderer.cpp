@@ -24,12 +24,12 @@
 
 OpenGLRenderer::OpenGLRenderer(SportsWindow* sportswin) : pSportsWindow(sportswin)
 {
-	SportsMakeContextCurrent(pSportsWindow);
+    SportsMakeContextCurrent(pSportsWindow);
 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
-		sports::runtime_error("Failed to initialize GLAD");
+    if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
+        sports::runtime_error("Failed to initialize GLAD");
 
-	glViewport(0, 0, pSportsWindow->GetWidth(), pSportsWindow->GetHeight());
+    glViewport(0, 0, pSportsWindow->GetWidth(), pSportsWindow->GetHeight());
 }
 
 OpenGLRenderer::~OpenGLRenderer()

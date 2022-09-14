@@ -5,5 +5,5 @@
 
 SportsRenderer* SportsCreateRenderer(SportsWindow* pSportsWindow)
 {
-	return new OpenGLRenderer(pSportsWindow);
+    return new OpenGLRenderer(pSportsWindow);
 }

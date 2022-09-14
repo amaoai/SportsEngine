@@ -23,14 +23,14 @@
 
 class OpenGLRenderer : public SportsRenderer {
 public:
-	OpenGLRenderer(SportsWindow *sportswin);
-	~OpenGLRenderer();
+    OpenGLRenderer(SportsWindow *sportswin);
+    ~OpenGLRenderer();
 
-	void			BeginDrawFrame();
-	void			EndDrawFrame();
-	void			SetClearColor(float r, float g, float b, float a);
-	void			ClearColorBuffer();
+    void            BeginDrawFrame();
+    void            EndDrawFrame();
+    void            SetClearColor(float r, float g, float b, float a);
+    void            ClearColorBuffer();
 
 private:
-	SportsWindow*	pSportsWindow;
+    SportsWindow*    pSportsWindow;
 };

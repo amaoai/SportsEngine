@@ -23,16 +23,16 @@
 #include "sportswin.h"
 
 enum RenderAPI {
-	OpenGL,
-	Vulkan,
+    OpenGL,
+    Vulkan,
 };
 
 /* 渲染器 */
 class SportsRenderer {
 public:
-	virtual void    BeginDrawFrame() = 0;
-	virtual void	EndDrawFrame() = 0;
-	virtual void	SetClearColor(float r, float g, float b, float a) = 0;
+    virtual void    BeginDrawFrame() = 0;
+    virtual void    EndDrawFrame() = 0;
+    virtual void    SetClearColor(float r, float g, float b, float a) = 0;
     virtual void    ClearColorBuffer() = 0;
 };
 

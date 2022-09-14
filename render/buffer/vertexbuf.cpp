@@ -23,12 +23,12 @@
 
 SportsVertexBuffer::SportsVertexBuffer(unsigned long size, float* pVertices)
 {
-	glGenVertexArrays(1, &vertexArrayId);
-	glBindVertexArray(vertexArrayId);
+    glGenVertexArrays(1, &vertexArrayId);
+    glBindVertexArray(vertexArrayId);
 
-	glGenBuffers(1, &vertexBufferId);
-	glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId);
-	glBufferData(GL_ARRAY_BUFFER, size, pVertices, GL_STATIC_DRAW);
+    glGenBuffers(1, &vertexBufferId);
+    glBindBuffer(GL_ARRAY_BUFFER, vertexBufferId);
+    glBufferData(GL_ARRAY_BUFFER, size, pVertices, GL_STATIC_DRAW);
 
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void *) 0);
     glEnableVertexAttribArray(0);
@@ -47,10 +47,10 @@ SportsVertexBuffer::~SportsVertexBuffer()
 
 void SportsVertexBuffer::Bind()
 {
-	glBindVertexArray(vertexArrayId);
+    glBindVertexArray(vertexArrayId);
 }
 
 void SportsVertexBuffer::UnBind()
 {
-	glBindVertexArray(0);
+    glBindVertexArray(0);
 }

@@ -49,9 +49,9 @@ public:
     void            SwapBuffers()       { glfwSwapBuffers(pGLFWwindow); }
 
 private:
-	int                                 width;
-	int                                 height;
-	GLFWwindow* pGLFWwindow;
+    int                                 width;
+    int                                 height;
+    GLFWwindow* pGLFWwindow;
     SportsfnSetWindowResizeCallback     sportsfnSetWindowResizeCallback;
     SportsfnSetFramebufferCallback      sportsfnSetFramebufferCallback;
 };
