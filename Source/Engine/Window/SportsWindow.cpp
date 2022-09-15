@@ -17,7 +17,7 @@
  * ************************************************************************/
 
 /* Creates on 2022/9/14. */
-#include "sportswin.h"
+#include "SportsWindow.h"
 
 SportsWindow::SportsWindow(int w, int h, const char* title) : width(w), height(h)
 {

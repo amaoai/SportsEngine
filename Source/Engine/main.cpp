@@ -17,17 +17,22 @@
  * ************************************************************************/
 
 /* Creates on 2022/9/14. */
-#include "vertexbuf.h"
+#include <iostream>
+#include <glad/glad.h>
+#include "Window/SportsWindow.h"
+#include "Renderer/SportsRenderer.h"
 
-#include "renderer/platform/opengl/opengl_vertex_buffer.h"
-
-bool SportsCreateVertexBuffer(unsigned long size, float *pVertices, SportsVertexBuffer** ppSportsVertexBuffer)
+int main()
 {
-    *ppSportsVertexBuffer = new OpenGLVertexBuffer(size, pVertices);
-    return true;
-}
+    auto sportswin = new SportsWindow(800, 600, "sports");
 
-void SportsDestroyVertexBuffer(SportsVertexBuffer *pSportsVertexBuffer)
-{
-    delete pSportsVertexBuffer;
+    while (!sportswin->ShouldClose()) {
+        SportsPollEvents();
+        sportswin->SwapBuffers();
+    }
+
+    delete sportswin;
+    SportsTerminate();
+
+    return 0;
 }

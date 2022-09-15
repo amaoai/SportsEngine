@@ -19,27 +19,33 @@
 /* Creates on 2022/9/14. */
 #pragma once
 
-#include "sports/sportspch.h"
-#include "sportswin.h"
-#include "buffer/vertexbuf.h"
-#include "buffer/indexbuf.h"
+#include <Sports.h>
+#include "Window/SportsWindow.h"
+#include "Renderer/SportsBuffers.h"
 
-enum RenderAPI {
+/* 所有支持的渲染 API 枚举 */
+enum SportsRenderAPI {
     OpenGL,
     Vulkan,
+    DirectX,
 };
 
 /* 渲染器 */
 class SportsRenderer {
 public:
     virtual        ~SportsRenderer() {};
-
+                                       
     virtual void    BeginNewFrame() = 0;
     virtual void    EndNewFrame() = 0;
     virtual void    SetClearColor(float r, float g, float b, float a) = 0;
     virtual void    ClearColorBuffer() = 0;
-    virtual void    DrawFrame() = 0;
+
+public:
+    static SportsVertexBuffer *CreateVertexBuffer(unsigned long size, float* pVertices); /* create vertex buffer */
+    static void DestroyVertexBuffer(SportsVertexBuffer* pSportsVertexBuffer);
+    static SportsIndexBuffer *CreateIndexBuffer(unsigned long size, unsigned int* pIndices);  /* create index buffer */
+    static void DestroyIndexBuffer(SportsIndexBuffer* pSportsIndexBuffer);
 };
 
-extern SportsRenderer* SportsCreateRenderer(SportsWindow *pSportsWindow);
-extern void SportsDestroyRenderer(SportsRenderer *pSportsRenderer);
+extern SportsRenderer* SportsCreateRenderer(SportsWindow* pSportsWindow);
+extern void SportsDestroyRenderer(SportsRenderer* pSportsRenderer);

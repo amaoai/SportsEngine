@@ -28,19 +28,26 @@ project ("SportsEngine")
 set(CMAKE_CXX_STANDARD 23)
 
 # 添加 include
+include_directories(
+    Source/Engine
+    Source/Utils
+)
+
+# 添加 system include
 include_directories(SYSTEM
-    ${PROJECT_SOURCE_DIR}
-    ${PROJECT_SOURCE_DIR}/third-party/glfw/include
-    ${PROJECT_SOURCE_DIR}/third-party/glad/include
+        Source/Pch
+        Source/Utils/Include
+        Source/ThirdParty/glfw/include
+        Source/ThirdParty/glad/include
 )
 
 message(STATUS "Compile ID: ${CMAKE_CXX_COMPILER_ID}")
 
 # glfw 动态链接库
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)
-    link_directories(${PROJECT_SOURCE_DIR}/third-party/glfw/lib-mingw-w64)
+    link_directories(Source/ThirdParty/glfw/lib-mingw-w64)
 elseif((${CMAKE_CXX_COMPILER_ID} STREQUAL MSVC))
-    link_directories(${PROJECT_SOURCE_DIR}/third-party/glfw/lib-vc2022)
+    link_directories(Source/ThirdParty/glfw/lib-vc2022)
 endif()
 
 # 查找 vulkan 库
@@ -52,16 +59,11 @@ endif()
 
 # 将源代码添加到此项目的可执行文件。
 add_executable (${PROJECT_NAME} 
-    "main.cpp"
-    "sportswin.cpp"
-    "tools/logs.cpp"
-    "third-party/glad/src/glad.c"
-    "renderer/renderer.cpp"
-    "renderer/buffer/vertexbuf.cpp"
-    "renderer/buffer/indexbuf.cpp"
-    "renderer/platform/opengl/opengl_renderer.cpp"
-    "renderer/platform/opengl/opengl_vertex_buffer.cpp"
-    "renderer/platform/opengl/opengl_index_buffer.cpp"
+    "Source/Engine/main.cpp"
+    "Source/Engine/Window/SportsWindow.cpp"
+    "Source/Utils/Loggers.cpp"
+    "Source/ThirdParty/glad/src/glad.c"
+    "Source/Engine/Renderer/SportsRenderer.cpp"
 )
 
 # 根据编译器匹配 glfw 动态库

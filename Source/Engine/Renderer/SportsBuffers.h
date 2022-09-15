@@ -16,18 +16,26 @@
  *
  * ************************************************************************/
 
-/* Creates on 2022/9/14. */
-#include "indexbuf.h"
+/* Creates on 2022/9/15. */
+#ifndef SPORTSENGINE_SPORTSBUFFERS_H
+#define SPORTSENGINE_SPORTSBUFFERS_H
 
-#include "renderer/platform/opengl/opengl_index_buffer.h"
+/*! @brief 顶点结构缓冲区抽象类（需要各个对应的渲染 API 实现改功能）
+ */
+class SportsVertexBuffer {
+public:
+    virtual        ~SportsVertexBuffer() = 0;
+    virtual void    Bind() = 0;
+    virtual void    UnBind() = 0;
+};
 
-bool SportsCreateIndexBuffer(unsigned long size, unsigned int *pIndices, SportsIndexBuffer **ppSportsIndexBuffer)
-{
-    *ppSportsIndexBuffer = new OpenGLIndexBuffer(size, pIndices);
-    return true;
-}
+/*! @brief 顶点索引结构缓冲区抽象类（需要各个对应的渲染 API 实现改功能）
+ */
+class SportsIndexBuffer {
+public:
+    virtual        ~SportsIndexBuffer() = 0;
+    virtual void    Bind() = 0;
+    virtual void    UnBind() = 0;
+};
 
-void SportsDestroyIndexBuffer(SportsIndexBuffer *pSportsIndexBuffer)
-{
-    delete pSportsIndexBuffer;
-}
+#endif /* SPORTSENGINE_SPORTSBUFFERS_H */
