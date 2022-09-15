@@ -29,3 +29,5 @@
 #endif
 
 #define SPORTS_API extern
+
+#define SPORTS_DEFINE_HANDLE(object) typedef class object##_T* object;

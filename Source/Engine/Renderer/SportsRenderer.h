@@ -20,8 +20,8 @@
 #pragma once
 
 #include <Sports.h>
+
 #include "Window/SportsWindow.h"
-#include "Renderer/SportsBuffers.h"
 
 /* 所有支持的渲染 API 枚举 */
 enum SportsRenderAPI {
@@ -30,21 +30,25 @@ enum SportsRenderAPI {
     DirectX,
 };
 
+SPORTS_DEFINE_HANDLE(SportsVertexBuffer)
+SPORTS_DEFINE_HANDLE(SportsIndexBuffer)
+SPORTS_DEFINE_HANDLE(SportsShaderModule)
+
 /* 渲染器 */
 class SportsRenderer {
 public:
-    virtual        ~SportsRenderer() {};
-                                       
-    virtual void    BeginNewFrame() = 0;
-    virtual void    EndNewFrame() = 0;
-    virtual void    SetClearColor(float r, float g, float b, float a) = 0;
-    virtual void    ClearColorBuffer() = 0;
+    static void     InitRenderer(SportsRenderAPI renderAPI); /* 初始化渲染器，指定图形API */
+    static void     BeginNewFrame();
+    static void     EndNewFrame();
+    static void     Submit();
 
 public:
-    static SportsVertexBuffer *CreateVertexBuffer(unsigned long size, float* pVertices); /* create vertex buffer */
-    static void DestroyVertexBuffer(SportsVertexBuffer* pSportsVertexBuffer);
-    static SportsIndexBuffer *CreateIndexBuffer(unsigned long size, unsigned int* pIndices);  /* create index buffer */
-    static void DestroyIndexBuffer(SportsIndexBuffer* pSportsIndexBuffer);
+    static void CreateVertexBuffer(unsigned long size, float* pVertices, SportsVertexBuffer *pSportsVertexBuffer); /* create vertex buffer */
+    static void DestroyVertexBuffer(SportsVertexBuffer vertexBuffer);
+    static void CreateIndexBuffer(unsigned long size, unsigned int* pIndices, SportsIndexBuffer *pSportsIndexBuffer);  /* create index buffer */
+    static void DestroyIndexBuffer(SportsIndexBuffer indexBuffer);
+    static void CreateShaderModule(const char *filename, SportsShaderModule *pSportsShaderModule); /* create shader module */
+    static void DestroyShaderModule(SportsShaderModule shaderModule);
 };
 
 extern SportsRenderer* SportsCreateRenderer(SportsWindow* pSportsWindow);

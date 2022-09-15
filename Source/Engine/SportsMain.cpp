@@ -18,16 +18,23 @@
 
 /* Creates on 2022/9/14. */
 #include <iostream>
-#include <glad/glad.h>
-#include "Window/SportsWindow.h"
 #include "Renderer/SportsRenderer.h"
 
 int main()
 {
     auto sportswin = new SportsWindow(800, 600, "sports");
 
+    SportsRenderer::InitRenderer(SportsRenderAPI::OpenGL);
+
     while (!sportswin->ShouldClose()) {
         SportsPollEvents();
+
+        SportsRenderer::BeginNewFrame();
+        {
+
+        }
+        SportsRenderer::EndNewFrame();
+
         sportswin->SwapBuffers();
     }
 

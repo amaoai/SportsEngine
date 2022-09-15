@@ -1,31 +1,30 @@
 #include "SportsRenderer.h"
 
-SportsVertexBuffer* SportsRenderer::CreateVertexBuffer(unsigned long size, float* pVertices)
+void SportsRenderer::CreateVertexBuffer(unsigned long size, float *pVertices, SportsVertexBuffer *pSportsVertexBuffer)
 {
-    return NULL;
 }
 
-void SportsRenderer::DestroyVertexBuffer(SportsVertexBuffer* pSportsVertexBuffer)
+void SportsRenderer::DestroyVertexBuffer(SportsVertexBuffer vertexBuffer)
 {
-    delete pSportsVertexBuffer;
+    delete vertexBuffer;
 }
 
-SportsIndexBuffer* SportsRenderer::CreateIndexBuffer(unsigned long size, unsigned int* pIndices)
+void SportsRenderer::CreateIndexBuffer(unsigned long size, unsigned int *pIndices, SportsIndexBuffer *pSportsIndexBuffer)
 {
-    return NULL;
+
 }
 
-void SportsRenderer::DestroyIndexBuffer(SportsIndexBuffer* pSportsIndexBuffer)
+void SportsRenderer::DestroyIndexBuffer(SportsIndexBuffer indexBuffer)
 {
-    delete pSportsIndexBuffer;
+    delete indexBuffer;
 }
 
-SportsRenderer* SportsCreateRenderer(SportsWindow* pSportsWindow)
+void SportsRenderer::CreateShaderModule(const char *filename, SportsShaderModule *pSportsShaderModule)
 {
-    return NULL;
+
 }
 
-void SportsDestroyRenderer(SportsRenderer *pSportsRenderer)
+void SportsRenderer::DestroyShaderModule(SportsShaderModule shaderModule)
 {
-    delete pSportsRenderer;
+    delete shaderModule;
 }

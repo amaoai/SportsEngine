@@ -64,7 +64,7 @@ add_executable (${PROJECT_NAME}
     "Source/Utils/Loggers.cpp"
     "Source/ThirdParty/glad/src/glad.c"
     "Source/Engine/Renderer/SportsRenderer.cpp"
-)
+        )
 
 # 根据编译器匹配 glfw 动态库
 if(${CMAKE_CXX_COMPILER_ID} STREQUAL GNU)

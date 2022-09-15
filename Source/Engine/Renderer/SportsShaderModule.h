@@ -17,27 +17,14 @@
  * ************************************************************************/
 
 /* Creates on 2022/9/15. */
-#ifndef SPORTSENGINE_SPORTSBUFFERS_H
-#define SPORTSENGINE_SPORTSBUFFERS_H
+#ifndef SPORTSENGINE_SPORTSSHADERMODULE_H
+#define SPORTSENGINE_SPORTSSHADERMODULE_H
 
-#include <Utils/Loggers.h>
-
-/*! @brief 顶点结构缓冲区抽象类（需要各个对应的渲染 API 实现改功能）
+/*! @brief ��ɫ��ģ��
  */
-class SportsVertexBuffer_T {
+class SportsShaderModule_T {
 public:
-    virtual        ~SportsVertexBuffer_T() {};
-    virtual void    Bind() = 0;
-    virtual void    UnBind() = 0;
+    virtual        ~SportsShaderModule_T() {};
 };
 
-/*! @brief 顶点索引结构缓冲区抽象类（需要各个对应的渲染 API 实现改功能）
- */
-class SportsIndexBuffer_T {
-public:
-    virtual        ~SportsIndexBuffer_T() {};
-    virtual void    Bind() = 0;
-    virtual void    UnBind() = 0;
-};
-
-#endif /* SPORTSENGINE_SPORTSBUFFERS_H */
+#endif /* SPORTSENGINE_SPORTSSHADERMODULE_H */
