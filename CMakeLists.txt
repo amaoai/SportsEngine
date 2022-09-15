@@ -59,7 +59,7 @@ endif()
 
 # 将源代码添加到此项目的可执行文件。
 add_executable (${PROJECT_NAME} 
-    "Source/Engine/main.cpp"
+    "Source/Engine/SportsMain.cpp"
     "Source/Engine/Window/SportsWindow.cpp"
     "Source/Utils/Loggers.cpp"
     "Source/ThirdParty/glad/src/glad.c"
