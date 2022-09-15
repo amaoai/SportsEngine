@@ -22,34 +22,50 @@
 #include <Sports.h>
 
 #include "Window/SportsWindow.h"
+#include "StandardRenderer.h"
 
-/* 所有支持的渲染 API 枚举 */
+/*! @brief 所有支持的渲染 API 枚举
+ */
 enum SportsRenderAPI {
     OpenGL,
     Vulkan,
     DirectX,
 };
 
-SPORTS_DEFINE_HANDLE(SportsVertexBuffer)
-SPORTS_DEFINE_HANDLE(SportsIndexBuffer)
-SPORTS_DEFINE_HANDLE(SportsShaderModule)
-
-/* 渲染器 */
-class SportsRenderer {
+/*! @brief 渲染命令
+ * 
+ *   需要在 SportsRenderer::BeginNewFrame() 和 SportsRenderer::EndNewFrame() 的作用
+ * 范围内调用渲染命令才得以生效。
+ */
+class SportsRenderCommand {
 public:
-    static void     InitRenderer(SportsRenderAPI renderAPI); /* 初始化渲染器，指定图形API */
-    static void     BeginNewFrame();
-    static void     EndNewFrame();
-    static void     Submit();
-
-public:
-    static void CreateVertexBuffer(unsigned long size, float* pVertices, SportsVertexBuffer *pSportsVertexBuffer); /* create vertex buffer */
-    static void DestroyVertexBuffer(SportsVertexBuffer vertexBuffer);
-    static void CreateIndexBuffer(unsigned long size, unsigned int* pIndices, SportsIndexBuffer *pSportsIndexBuffer);  /* create index buffer */
-    static void DestroyIndexBuffer(SportsIndexBuffer indexBuffer);
-    static void CreateShaderModule(const char *filename, SportsShaderModule *pSportsShaderModule); /* create shader module */
-    static void DestroyShaderModule(SportsShaderModule shaderModule);
+    static void     SetClearColor(float r, float g, float b, float a);
+    static void     ClearColorBuffer();
 };
 
-extern SportsRenderer* SportsCreateRenderer(SportsWindow* pSportsWindow);
-extern void SportsDestroyRenderer(SportsRenderer* pSportsRenderer);
+/*! @brief 渲染器初始化结构体
+ */
+struct SportsRendererInitializeInfo {
+    SportsRenderAPI renderAPI;
+    SportsWindow*   pSportsWindow;
+};
+
+/*! @brief 渲染器
+ */
+class SportsRenderer {
+public:
+    static void     InitRenderer(SportsRendererInitializeInfo *pSportsRendererInitializeInfo); /* 初始化渲染器，指定图形API */
+
+    static void     BeginNewFrame();
+    static void     EndNewFrame();
+    static void     DrawArray(SportsVertexBuffer vertexBuffer);
+    static void     DrawIndex(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer);
+
+public:
+    static void     CreateVertexBuffer(unsigned long size, float* pVertices, SportsVertexBuffer* pSportsVertexBuffer); /* create vertex buffer */
+    static void     DestroyVertexBuffer(SportsVertexBuffer vertexBuffer);
+    static void     CreateIndexBuffer(unsigned long size, unsigned int* pIndices, SportsIndexBuffer* pSportsIndexBuffer);  /* create index buffer */
+    static void     DestroyIndexBuffer(SportsIndexBuffer indexBuffer);
+    static void     CreateShaderModule(const char* filename, SportsShaderModule* pSportsShaderModule); /* create shader module */
+    static void     DestroyShaderModule(SportsShaderModule shaderModule);
+};

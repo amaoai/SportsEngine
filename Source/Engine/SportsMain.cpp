@@ -24,14 +24,19 @@ int main()
 {
     auto sportswin = new SportsWindow(800, 600, "sports");
 
-    SportsRenderer::InitRenderer(SportsRenderAPI::OpenGL);
+    SportsRendererInitializeInfo sportsRendererInitializeInfo = {};
+    sportsRendererInitializeInfo.renderAPI = SportsRenderAPI::OpenGL;
+    sportsRendererInitializeInfo.pSportsWindow = sportswin;
+
+    SportsRenderer::InitRenderer(&sportsRendererInitializeInfo);
 
     while (!sportswin->ShouldClose()) {
         SportsPollEvents();
 
         SportsRenderer::BeginNewFrame();
         {
-
+            SportsRenderCommand::SetClearColor(0.0f, 0.2f, 0.4f, 0.0f);
+            SportsRenderCommand::ClearColorBuffer();
         }
         SportsRenderer::EndNewFrame();
 

@@ -16,26 +16,31 @@
  *
  * ************************************************************************/
 
-/* Creates on 2022/9/15. */
-#ifndef SPORTSENGINE_SPORTSBUFFERS_H
-#define SPORTSENGINE_SPORTSBUFFERS_H
+/* Creates on 2022/9/16. */
+#ifndef SPORTSENGINE_STANDARDRENDERER_H
+#define SPORTSENGINE_STANDARDRENDERER_H
 
-/*! @brief 顶点结构缓冲区抽象类（需要各个对应的渲染 API 实现改功能）
+SPORTS_DEFINE_HANDLE(SportsVertexBuffer)
+SPORTS_DEFINE_HANDLE(SportsIndexBuffer)
+SPORTS_DEFINE_HANDLE(SportsShaderModule)
+
+/*! @brief ��׼��Ⱦ��Ⱦ�����
+ *
  */
-class SportsVertexBuffer_T {
+class StandardRenderCommand {
 public:
-    virtual        ~SportsVertexBuffer_T() {};
-    virtual void    Bind() = 0;
-    virtual void    UnBind() = 0;
+    virtual void    SetClearColor(float r, float g, float b, float a) = 0;
+    virtual void    ClearColorBuffer() = 0;
 };
 
-/*! @brief 顶点索引结构缓冲区抽象类（需要各个对应的渲染 API 实现改功能）
+/*! @brief ��׼��Ⱦ����������
  */
-class SportsIndexBuffer_T {
+class StandardRenderer {
 public:
-    virtual        ~SportsIndexBuffer_T() {};
-    virtual void    Bind() = 0;
-    virtual void    UnBind() = 0;
+    virtual void    BeginNewFrame() = 0;
+    virtual void    EndNewFrame() = 0;
+    virtual void    DrawArray(SportsVertexBuffer vertexBuffer) = 0;
+    virtual void    DrawIndex(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer) = 0;
 };
 
-#endif /* SPORTSENGINE_SPORTSBUFFERS_H */
+#endif /* SPORTSENGINE_STANDARDRENDERER_H */
