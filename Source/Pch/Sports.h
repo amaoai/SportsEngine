@@ -21,6 +21,7 @@
 
 #include <stdio.h>
 #include <memory>
+#include <assert.h>
 
 #if defined(WIN32)
 #  define SPORTS_API extern
@@ -31,3 +32,5 @@
 #define SPORTS_API extern
 
 #define SPORTS_DEFINE_HANDLE(object) typedef class object##_T* object;
+
+#define SPORTS_ASSERTS(cond) assert(cond)
