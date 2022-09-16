@@ -40,6 +40,7 @@ public:
     void            SetWindowSize(int w, int h);
     void            SetWindowResizeCallback(SportsfnSetWindowResizeCallback callback);
     void            SetFramebufferCallback(SportsfnSetFramebufferCallback callback);
+    void            SetTitle(const char *newTitle);
 
     bool            GetKey(int key)     { return glfwGetKey(pGLFWwindow, key); }
     bool            ShouldClose()       { return glfwWindowShouldClose(pGLFWwindow); }

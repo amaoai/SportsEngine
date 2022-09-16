@@ -70,3 +70,8 @@ void SportsWindow::SetFramebufferCallback(SportsfnSetFramebufferCallback callbac
         sportswin->sportsfnSetFramebufferCallback(sportswin, w, h);
     });
 }
+
+void SportsWindow::SetTitle(const char* newTitle)
+{
+    glfwSetWindowTitle(pGLFWwindow, newTitle);
+}

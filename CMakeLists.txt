@@ -37,6 +37,8 @@ include_directories(
 include_directories(SYSTEM
         Source/Pch
         Source/Utils/Include
+        Source/ThirdParty/
+        Source/ThirdParty/imgui
         Source/ThirdParty/glfw/include
         Source/ThirdParty/glad/include
 )
@@ -57,6 +59,8 @@ if(${Vulkan_FOUND})
     include_directories(SYSTEM ${Vulkan_INCLUDE_DIRS})
 endif()
 
+link_libraries(imm32)
+
 # 将源代码添加到此项目的可执行文件。
 add_executable (${PROJECT_NAME} 
     "Source/Engine/SportsMain.cpp"
@@ -67,6 +71,15 @@ add_executable (${PROJECT_NAME}
     "Source/Engine/Platform/OpenGL/OpenGLRenderer.cpp"
     "Source/Engine/Platform/OpenGL/OpenGLBuffers.cpp"
     "Source/Engine/Platform/OpenGL/OpenGLShaderModule.cpp"
+    "Source/Engine/ImGui/ImGuiRenderer.cpp"
+    # --* ThirdParty/ImGui *-- #
+    "Source/ThirdParty/imgui/imgui.cpp"
+    "Source/ThirdParty/imgui/imgui_tables.cpp"
+    "Source/ThirdParty/imgui/imgui_demo.cpp"
+    "Source/ThirdParty/imgui/imgui_draw.cpp"
+    "Source/ThirdParty/imgui/imgui_widgets.cpp"
+    "Source/ThirdParty/imgui/backends/imgui_impl_opengl3.cpp"
+    "Source/ThirdParty/imgui/backends/imgui_impl_glfw.cpp"
 )
 
 # 根据编译器匹配 glfw 动态库

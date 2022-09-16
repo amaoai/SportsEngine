@@ -19,6 +19,8 @@
 /* Creates on 2022/9/14. */
 #include <iostream>
 #include "Renderer/SportsRenderer.h"
+#include <imgui.h>
+#include "ImGui/ImGuiRenderer.h"
 
 int main()
 {
@@ -29,6 +31,8 @@ int main()
     sportsRendererInitializeInfo.pSportsWindow = sportswin;
 
     SportsRenderer::InitRenderer(&sportsRendererInitializeInfo);
+
+    ImGuiRenderer::InitImGuiRenderer(sportswin);
 
     float vertices[] = {
         0.5f, 0.5f, 0.0f,
@@ -51,20 +55,18 @@ int main()
     SportsShaderModule simpleShaderModule;
     SportsRenderer::CreateShaderModule("../Shaders/SimpleShader.vert", "../Shaders/SimpleShader.frag", &simpleShaderModule);
 
+    bool showDemoWindow = true;
     while (!sportswin->ShouldClose()) {
         SportsPollEvents();
 
         SportsRenderer::BeginNewFrame();
         {
+            ImGuiRenderer::BeginImGuiNewFrame();
+            ImGui::ShowDemoWindow(&showDemoWindow);
+            ImGuiRenderer::EndImGuiNewFrame();
+
             SportsRenderCommand::ClearColor(0.0f, 0.2f, 0.4f, 0.0f);
             SportsRenderCommand::ClearColorBuffer();
-
-            if (sportswin->GetKey(GLFW_KEY_A))
-                SportsRenderCommand::PolygonMode(SPORTS_POLYGON_MODE_LINE);
-
-            if (sportswin->GetKey(GLFW_KEY_D))
-                SportsRenderCommand::PolygonMode(SPORTS_POLYGON_MODE_FILL);
-
             SportsRenderCommand::BindShaderModule(simpleShaderModule);
             SportsRenderCommand::DrawIndexed(vertexBuffer, indexBuffer);
         }
