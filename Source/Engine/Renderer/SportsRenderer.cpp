@@ -41,6 +41,12 @@ void SportsRenderCommand::DrawArray(SportsVertexBuffer vertexBuffer)
     s_StandardRenderCommand->DrawArray(vertexBuffer);
 }
 
+void SportsRenderCommand::DrawIndexed(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer)
+{
+    ASSTER_STANDARD_RENDER_COMMAND();
+    s_StandardRenderCommand->DrawIndexed(vertexBuffer, indexBuffer);
+}
+
 /////////////////////////////////////////////////////
 // SportsRenderer Implements.
 /////////////////////////////////////////////////////

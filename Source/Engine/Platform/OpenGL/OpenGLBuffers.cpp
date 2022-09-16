@@ -62,20 +62,29 @@ void OpenGLVertexBuffer::UnBind()
 /////////////////////////////////////////////////////
 OpenGLIndexBuffer::OpenGLIndexBuffer(unsigned int size, unsigned int* pIndices)
 {
+    this->count = size / sizeof(int);
 
+    glGenBuffers(1, &EBO);
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, size, pIndices, GL_STATIC_DRAW);
 }
 
 OpenGLIndexBuffer::~OpenGLIndexBuffer()
 {
-
+    glDeleteBuffers(1, &EBO);
 }
 
 void OpenGLIndexBuffer::Bind()
 {
-
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, EBO);
 }
 
 void OpenGLIndexBuffer::UnBind()
 {
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+}
 
+int OpenGLIndexBuffer::GetCount()
+{
+    return this->count;
 }

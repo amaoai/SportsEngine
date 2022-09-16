@@ -43,6 +43,7 @@ public:
     static void     ClearColorBuffer();
     static void     BindShaderModule(SportsShaderModule shaderModule);
     static void     DrawArray(SportsVertexBuffer vertexBuffer);
+    static void     DrawIndexed(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer);
 };
 
 /*! @brief 渲染器初始化结构体

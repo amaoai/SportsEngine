@@ -31,13 +31,22 @@ int main()
     SportsRenderer::InitRenderer(&sportsRendererInitializeInfo);
 
     float vertices[] = {
-         0.0f,  0.5,  0.0f,
+        0.5f, 0.5f, 0.0f,
+        0.5f, -0.5f, 0.0f,
         -0.5f, -0.5f, 0.0f,
-         0.5f, -0.5f, 0.0f
+        -0.5f, 0.5f, 0.0f
+    };
+
+    unsigned int indices[] = {
+        0, 1, 3,
+        1, 2, 3
     };
 
     SportsVertexBuffer vertexBuffer;
     SportsRenderer::CreateVertexBuffer(sizeof(vertices), vertices, &vertexBuffer);
+
+    SportsIndexBuffer indexBuffer;
+    SportsRenderer::CreateIndexBuffer(sizeof(indices), indices, &indexBuffer);
 
     SportsShaderModule simpleShaderModule;
     SportsRenderer::CreateShaderModule("../Shaders/SimpleShader.vert", "../Shaders/SimpleShader.frag", &simpleShaderModule);
@@ -51,7 +60,7 @@ int main()
             SportsRenderCommand::ClearColorBuffer();
 
             SportsRenderCommand::BindShaderModule(simpleShaderModule);
-            SportsRenderCommand::DrawArray(vertexBuffer);
+            SportsRenderCommand::DrawIndexed(vertexBuffer, indexBuffer);
         }
         SportsRenderer::EndNewFrame();
 

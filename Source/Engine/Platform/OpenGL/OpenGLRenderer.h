@@ -31,6 +31,7 @@ public:
     void            ClearColorBuffer() override;
     void            BindShaderModule(SportsShaderModule shaderModule) override;
     void            DrawArray(SportsVertexBuffer vertexBuffer) override;
+    void            DrawIndexed(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer) override;
 };
 
 class OpenGLRenderer : public StandardRenderer {

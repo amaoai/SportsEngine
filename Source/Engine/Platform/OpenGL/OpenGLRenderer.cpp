@@ -57,6 +57,13 @@ void OpenGLRenderCommand::DrawArray(SportsVertexBuffer vertexBuffer)
     glDrawArrays(GL_TRIANGLES, 0, 3);
 }
 
+void OpenGLRenderCommand::DrawIndexed(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer)
+{
+    vertexBuffer->Bind();
+    indexBuffer->Bind();
+    glDrawElements(GL_TRIANGLES, indexBuffer->GetCount(), GL_UNSIGNED_INT, 0);
+}
+
 /////////////////////////////////////////////////////
 // OpenGLRenderer Implements.
 /////////////////////////////////////////////////////
@@ -120,12 +127,12 @@ void OpenGLAllocate::DestroyVertexBuffer(SportsVertexBuffer vertexBuffer)
 void OpenGLAllocate::CreateIndexBuffer(unsigned long size, unsigned int *pIndices,
                                        SportsIndexBuffer *pSportsIndexBuffer)
 {
-
+    *pSportsIndexBuffer = new OpenGLIndexBuffer(size, pIndices);
 }
 
 void OpenGLAllocate::DestroyIndexBuffer(SportsIndexBuffer indexBuffer)
 {
-
+    delete indexBuffer;
 }
 
 void OpenGLAllocate::CreateShaderModule(const char *vertfile, const char *fragfile,

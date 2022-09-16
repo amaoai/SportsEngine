@@ -42,8 +42,10 @@ public:
 
     void            Bind() override;
     void            UnBind() override;
+    int             GetCount() override;
 
 private:
+    int                                 count;
     unsigned int                        EBO;
 };
 

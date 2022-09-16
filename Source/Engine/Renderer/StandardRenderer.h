@@ -35,6 +35,7 @@ public:
     virtual void    ClearColorBuffer() = 0;
     virtual void    BindShaderModule(SportsShaderModule shaderModule) = 0;
     virtual void    DrawArray(SportsVertexBuffer vertexBuffer) = 0;
+    virtual void    DrawIndexed(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer) = 0;
 };
 
 /*! @brief 标准渲染器函数定义
