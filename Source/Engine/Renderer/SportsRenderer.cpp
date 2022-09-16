@@ -17,10 +17,10 @@ static StandardAllocate* s_StandardAllocate = NULL;
 /////////////////////////////////////////////////////
 // SportsRenderCommand Implements.
 /////////////////////////////////////////////////////
-void SportsRenderCommand::SetClearColor(float r, float g, float b, float a)
+void SportsRenderCommand::ClearColor(float r, float g, float b, float a)
 {
     ASSTER_STANDARD_RENDER_COMMAND();
-    s_StandardRenderCommand->SetClearColor(r, g, b, a);
+    s_StandardRenderCommand->ClearColor(r, g, b, a);
 }
 
 void SportsRenderCommand::ClearColorBuffer()
@@ -33,6 +33,12 @@ void SportsRenderCommand::BindShaderModule(SportsShaderModule shaderModule)
 {
     ASSTER_STANDARD_RENDER_COMMAND();
     s_StandardRenderCommand->BindShaderModule(shaderModule);
+}
+
+void SportsRenderCommand::PolygonMode(SportsPolygonMode polygonMode)
+{
+    ASSTER_STANDARD_RENDER_COMMAND();
+    s_StandardRenderCommand->PolygonMode(polygonMode);
 }
 
 void SportsRenderCommand::DrawArray(SportsVertexBuffer vertexBuffer)

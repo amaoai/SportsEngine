@@ -36,7 +36,7 @@ OpenGLRenderCommand::~OpenGLRenderCommand()
 
 }
 
-void OpenGLRenderCommand::SetClearColor(float r, float g, float b, float a)
+void OpenGLRenderCommand::ClearColor(float r, float g, float b, float a)
 {
     glClearColor(r, g, b, a);
 }
@@ -49,6 +49,14 @@ void OpenGLRenderCommand::ClearColorBuffer()
 void OpenGLRenderCommand::BindShaderModule(SportsShaderModule shaderModule)
 {
     shaderModule->Bind();
+}
+
+void OpenGLRenderCommand::PolygonMode(SportsPolygonMode polygonMode)
+{
+    switch (polygonMode) {
+        case SPORTS_POLYGON_MODE_LINE: glPolygonMode(GL_FRONT_AND_BACK, GL_LINE); return;
+        case SPORTS_POLYGON_MODE_FILL: glPolygonMode(GL_FRONT_AND_BACK, GL_FILL); return;
+    }
 }
 
 void OpenGLRenderCommand::DrawArray(SportsVertexBuffer vertexBuffer)

@@ -39,14 +39,15 @@ enum SportsRenderAPI {
  */
 class SportsRenderCommand {
 public:
-    static void     SetClearColor(float r, float g, float b, float a);
+    static void     ClearColor(float r, float g, float b, float a);
     static void     ClearColorBuffer();
     static void     BindShaderModule(SportsShaderModule shaderModule);
+    static void     PolygonMode(SportsPolygonMode polygonMode);
     static void     DrawArray(SportsVertexBuffer vertexBuffer);
     static void     DrawIndexed(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer);
 };
 
-/*! @brief 渲染器初始化结构体
+/*! @brief 渲染器初始化结构体                             
  */
 struct SportsRendererInitializeInfo {
     SportsRenderAPI renderAPI;

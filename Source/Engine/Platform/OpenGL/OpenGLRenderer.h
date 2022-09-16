@@ -27,9 +27,10 @@ public:
     OpenGLRenderCommand();
     ~OpenGLRenderCommand();
 
-    void            SetClearColor(float r, float g, float b, float a) override;
+    void            ClearColor(float r, float g, float b, float a) override;
     void            ClearColorBuffer() override;
     void            BindShaderModule(SportsShaderModule shaderModule) override;
+    void            PolygonMode(SportsPolygonMode polygonMode) override;
     void            DrawArray(SportsVertexBuffer vertexBuffer) override;
     void            DrawIndexed(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer) override;
 };

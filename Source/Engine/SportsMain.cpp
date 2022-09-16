@@ -56,8 +56,14 @@ int main()
 
         SportsRenderer::BeginNewFrame();
         {
-            SportsRenderCommand::SetClearColor(0.0f, 0.2f, 0.4f, 0.0f);
+            SportsRenderCommand::ClearColor(0.0f, 0.2f, 0.4f, 0.0f);
             SportsRenderCommand::ClearColorBuffer();
+
+            if (sportswin->GetKey(GLFW_KEY_A))
+                SportsRenderCommand::PolygonMode(SPORTS_POLYGON_MODE_LINE);
+
+            if (sportswin->GetKey(GLFW_KEY_D))
+                SportsRenderCommand::PolygonMode(SPORTS_POLYGON_MODE_FILL);
 
             SportsRenderCommand::BindShaderModule(simpleShaderModule);
             SportsRenderCommand::DrawIndexed(vertexBuffer, indexBuffer);

@@ -26,14 +26,20 @@ SPORTS_DEFINE_HANDLE(SportsVertexBuffer)
 SPORTS_DEFINE_HANDLE(SportsIndexBuffer)
 SPORTS_DEFINE_HANDLE(SportsShaderModule)
 
+enum SportsPolygonMode {
+    SPORTS_POLYGON_MODE_FILL,
+    SPORTS_POLYGON_MODE_LINE
+};
+
 /*! @brief 标准渲染渲染命令定义
  *
  */
 class StandardRenderCommand {
 public:
-    virtual void    SetClearColor(float r, float g, float b, float a) = 0;
+    virtual void    ClearColor(float r, float g, float b, float a) = 0;
     virtual void    ClearColorBuffer() = 0;
     virtual void    BindShaderModule(SportsShaderModule shaderModule) = 0;
+    virtual void    PolygonMode(SportsPolygonMode polygonMode) = 0;
     virtual void    DrawArray(SportsVertexBuffer vertexBuffer) = 0;
     virtual void    DrawIndexed(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer) = 0;
 };
