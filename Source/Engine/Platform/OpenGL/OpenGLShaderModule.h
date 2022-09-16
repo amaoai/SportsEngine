@@ -16,18 +16,22 @@
  *
  * ************************************************************************/
 
-/* Creates on 2022/9/15. */
-#ifndef SPORTSENGINE_SPORTSSHADERMODULE_H
-#define SPORTSENGINE_SPORTSSHADERMODULE_H
+/* Creates on 2022/9/16. */
+#ifndef SPORTSENGINE_OPENGLSHADERMODULE_H
+#define SPORTSENGINE_OPENGLSHADERMODULE_H
 
-/*! @brief ×ÅÉ«Æ÷Ä£¿é
- */
-class SportsShaderModule_T {
+#include "Renderer/SportsShaderModule.h"
+
+class OpenGLShaderModule : public SportsShaderModule_T {
 public:
-    virtual        ~SportsShaderModule_T() {};
+    OpenGLShaderModule(const char *vertfile, const char *fragfile);
+    ~OpenGLShaderModule();
 
-    virtual void    Bind() = 0;
-    virtual void    UnBind() = 0;
+    void            Bind() override;
+    void            UnBind() override;
+
+private:
+    unsigned int    shaderModule;
 };
 
-#endif /* SPORTSENGINE_SPORTSSHADERMODULE_H */
+#endif /* SPORTSENGINE_OPENGLSHADERMODULE_H */

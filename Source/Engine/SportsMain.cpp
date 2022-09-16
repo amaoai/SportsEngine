@@ -30,6 +30,18 @@ int main()
 
     SportsRenderer::InitRenderer(&sportsRendererInitializeInfo);
 
+    float vertices[] = {
+         0.0f,  0.5,  0.0f,
+        -0.5f, -0.5f, 0.0f,
+         0.5f, -0.5f, 0.0f
+    };
+
+    SportsVertexBuffer vertexBuffer;
+    SportsRenderer::CreateVertexBuffer(sizeof(vertices), vertices, &vertexBuffer);
+
+    SportsShaderModule simpleShaderModule;
+    SportsRenderer::CreateShaderModule("../Shaders/SimpleShader.vert", "../Shaders/SimpleShader.frag", &simpleShaderModule);
+
     while (!sportswin->ShouldClose()) {
         SportsPollEvents();
 
@@ -37,12 +49,16 @@ int main()
         {
             SportsRenderCommand::SetClearColor(0.0f, 0.2f, 0.4f, 0.0f);
             SportsRenderCommand::ClearColorBuffer();
+
+            SportsRenderCommand::BindShaderModule(simpleShaderModule);
+            SportsRenderCommand::DrawArray(vertexBuffer);
         }
         SportsRenderer::EndNewFrame();
 
         sportswin->SwapBuffers();
     }
 
+    SportsRenderer::TerminateRenderer();
     delete sportswin;
     SportsTerminate();
 

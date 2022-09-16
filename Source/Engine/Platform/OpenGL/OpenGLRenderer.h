@@ -22,19 +22,21 @@
 #include "Renderer/StandardRenderer.h"
 #include "Window/SportsWindow.h"
 
-class OpenGLStandardRenderCommand : public StandardRenderCommand {
+class OpenGLRenderCommand : public StandardRenderCommand {
 public:
-    OpenGLStandardRenderCommand();
-    ~OpenGLStandardRenderCommand();
+    OpenGLRenderCommand();
+    ~OpenGLRenderCommand();
 
     void            SetClearColor(float r, float g, float b, float a) override;
     void            ClearColorBuffer() override;
+    void            BindShaderModule(SportsShaderModule shaderModule) override;
+    void            DrawArray(SportsVertexBuffer vertexBuffer) override;
 };
 
-class OpenGLStandardRenderer : public StandardRenderer {
+class OpenGLRenderer : public StandardRenderer {
 public:
-    OpenGLStandardRenderer(SportsWindow* sportswin);
-    ~OpenGLStandardRenderer();
+    OpenGLRenderer(SportsWindow* sportswin);
+    ~OpenGLRenderer();
 
     void            BeginNewFrame() override;
     void            EndNewFrame() override;
@@ -43,4 +45,17 @@ public:
 
 private:
     SportsWindow*                       pSportsWindow;
+};
+
+class OpenGLAllocate : public StandardAllocate {
+public:
+    OpenGLAllocate();
+    ~OpenGLAllocate();
+
+    void            CreateVertexBuffer(unsigned long size, float* pVertices, SportsVertexBuffer* pSportsVertexBuffer) override;
+    void            DestroyVertexBuffer(SportsVertexBuffer vertexBuffer) override;
+    void            CreateIndexBuffer(unsigned long size, unsigned int* pIndices, SportsIndexBuffer* pSportsIndexBuffer) override;
+    void            DestroyIndexBuffer(SportsIndexBuffer indexBuffer) override;
+    void            CreateShaderModule(const char *vertfile, const char *fragfile, SportsShaderModule* pSportsShaderModule) override;
+    void            DestroyShaderModule(SportsShaderModule shaderModule) override;
 };

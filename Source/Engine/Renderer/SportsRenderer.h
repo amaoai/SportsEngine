@@ -41,6 +41,8 @@ class SportsRenderCommand {
 public:
     static void     SetClearColor(float r, float g, float b, float a);
     static void     ClearColorBuffer();
+    static void     BindShaderModule(SportsShaderModule shaderModule);
+    static void     DrawArray(SportsVertexBuffer vertexBuffer);
 };
 
 /*! @brief 渲染器初始化结构体
@@ -55,17 +57,16 @@ struct SportsRendererInitializeInfo {
 class SportsRenderer {
 public:
     static void     InitRenderer(SportsRendererInitializeInfo *pSportsRendererInitializeInfo); /* 初始化渲染器，指定图形API */
+    static void     TerminateRenderer(); /* 销毁渲染器 */
 
     static void     BeginNewFrame();
     static void     EndNewFrame();
-    static void     DrawArray(SportsVertexBuffer vertexBuffer);
-    static void     DrawIndex(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer);
 
 public:
     static void     CreateVertexBuffer(unsigned long size, float* pVertices, SportsVertexBuffer* pSportsVertexBuffer); /* create vertex buffer */
     static void     DestroyVertexBuffer(SportsVertexBuffer vertexBuffer);
     static void     CreateIndexBuffer(unsigned long size, unsigned int* pIndices, SportsIndexBuffer* pSportsIndexBuffer);  /* create index buffer */
     static void     DestroyIndexBuffer(SportsIndexBuffer indexBuffer);
-    static void     CreateShaderModule(const char* filename, SportsShaderModule* pSportsShaderModule); /* create shader module */
+    static void     CreateShaderModule(const char* vertfile, const char* fragfile, SportsShaderModule* pSportsShaderModule); /* create shader module */
     static void     DestroyShaderModule(SportsShaderModule shaderModule);
 };

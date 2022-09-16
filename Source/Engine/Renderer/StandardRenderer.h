@@ -33,6 +33,8 @@ class StandardRenderCommand {
 public:
     virtual void    SetClearColor(float r, float g, float b, float a) = 0;
     virtual void    ClearColorBuffer() = 0;
+    virtual void    BindShaderModule(SportsShaderModule shaderModule) = 0;
+    virtual void    DrawArray(SportsVertexBuffer vertexBuffer) = 0;
 };
 
 /*! @brief 标准渲染器函数定义
@@ -43,6 +45,18 @@ public:
     virtual void    EndNewFrame() = 0;
     virtual void    DrawArray(SportsVertexBuffer vertexBuffer) = 0;
     virtual void    DrawIndex(SportsVertexBuffer vertexBuffer, SportsIndexBuffer indexBuffer) = 0;
+};
+
+/*! @brief 标准分配器，负责创建和销毁不同 API 的缓冲区和对象
+ */
+class StandardAllocate {
+public:
+    virtual void    CreateVertexBuffer(unsigned long size, float* pVertices, SportsVertexBuffer* pSportsVertexBuffer) = 0;
+    virtual void    DestroyVertexBuffer(SportsVertexBuffer vertexBuffer) = 0;
+    virtual void    CreateIndexBuffer(unsigned long size, unsigned int* pIndices, SportsIndexBuffer* pSportsIndexBuffer) = 0;
+    virtual void    DestroyIndexBuffer(SportsIndexBuffer indexBuffer) = 0;
+    virtual void    CreateShaderModule(const char *vertfile, const char *fragfile, SportsShaderModule* pSportsShaderModule) = 0;
+    virtual void    DestroyShaderModule(SportsShaderModule shaderModule) = 0;
 };
 
 #endif /* SPORTSENGINE_STANDARDRENDERER_H */

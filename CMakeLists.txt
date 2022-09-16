@@ -64,7 +64,9 @@ add_executable (${PROJECT_NAME}
     "Source/Utils/Loggers.cpp"
     "Source/ThirdParty/glad/src/glad.c"
     "Source/Engine/Renderer/SportsRenderer.cpp"
-    "Source/Engine/Platform/OpenGL/OpenGLStandardRenderer.cpp"
+    "Source/Engine/Platform/OpenGL/OpenGLRenderer.cpp"
+    "Source/Engine/Platform/OpenGL/OpenGLBuffers.cpp"
+    "Source/Engine/Platform/OpenGL/OpenGLShaderModule.cpp"
 )
 
 # 根据编译器匹配 glfw 动态库
